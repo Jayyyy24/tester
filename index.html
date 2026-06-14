@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special for Aishwarya 🎂</title>
+
+    <!-- Prevent bfcache (back-forward cache) on Android Chrome so pull-to-refresh
+         always does a full reload instead of restoring stale JS/DOM state. -->
+    <meta http-equiv="Cache-Control" content="no-store">
+
+    <!-- EARLIEST POSSIBLE hash reset — runs before CSS paints, before external
+         scripts load, before any event listener exists. This is the only reliable
+         way to strip a stale hash on Android Chrome pull-to-refresh because
+         replaceState in an external <script> can fire too late. -->
+    <script>
+        if (location.hash && location.hash !== '#welcome') {
+            history.replaceState(null, '', location.pathname + location.search);
+        }
+    </script>
+
+    <!-- Google Fonts for Playful, Clean and Handwritten Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="hearts-bg" class="hearts-container"></div>
+
+    <!-- Main Container -->
+    <main id="app">
+        
+        <!-- Screen 1: Welcome Check -->
+        <section id="screen-welcome" class="screen active">
+            <div class="container fade-in">
+                <!-- Typewriter Container -->
+                <div class="typewriter-box">
+                    <h1 class="script-font" id="welcome-title"></h1>
+                    <p class="question-text" id="welcome-question"></p>
+                </div>
+                
+                <!-- Added cat_flower sticker -->
+                <div class="welcome-sticker-wrapper bounce-animation">
+                    <img src="assets/cat_flower.png" alt="Welcome Cat Flower" class="welcome-cat-sticker">
+                    <span class="tap-hint script-font">Tap me!! I'll play ur fav song✨</span>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-yes" id="btn-welcome-yes">YES</button>
+                    <button class="btn btn-no" id="btn-welcome-no">NO</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 2: Go Away (If No) -->
+        <section id="screen-goaway" class="screen">
+            <div class="container text-center slide-up">
+                <h2 class="script-font warning-title">Why are you here?? 😤</h2>
+                <div class="sticker-wrapper">
+                    <img src="assets/cat_gun.png" alt="Angry Kitten Sticker" class="sticker bounce-animation">
+                </div>
+                <div class="go-away-row">
+                    <span class="script-font go-away-text">Go Away</span>
+                    <button class="btn btn-back" id="btn-goaway-back">BACK</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 3: Passcode Verification -->
+        <section id="screen-passcode" class="screen">
+            <div class="container slide-up">
+                <div class="passcode-layout">
+                    <!-- Left side: Cat holding gun sticker -->
+                    <div class="sticker-left">
+                        <img src="assets/cat_gun.png" alt="Angry Kitten Helper" class="sticker-passcode">
+                    </div>
+                    
+                    <!-- Right side: Title, dots and keypad -->
+                    <div class="keypad-container">
+                        <h2 class="script-font passcode-title">Really then tell<br>the passcode devi jii 😜</h2>
+                        
+                        <!-- Passcode Dots indicator (contains asterisks when active) -->
+                        <div class="dots-display">
+                            <span class="dot" id="dot-0"></span>
+                            <span class="dot" id="dot-1"></span>
+                            <span class="dot" id="dot-2"></span>
+                            <span class="dot" id="dot-3"></span>
+                        </div>
+                        <p class="passcode-hint">💡: When did you arrive on Earth?</p>
+
+                        <!-- Numeric Keypad -->
+                        <div class="keypad">
+                            <button class="key-btn" data-key="1">1</button>
+                            <button class="key-btn" data-key="2">2</button>
+                            <button class="key-btn" data-key="3">3</button>
+                            <button class="key-btn" data-key="4">4</button>
+                            <button class="key-btn" data-key="5">5</button>
+                            <button class="key-btn" data-key="6">6</button>
+                            <button class="key-btn" data-key="7">7</button>
+                            <button class="key-btn" data-key="8">8</button>
+                            <button class="key-btn" data-key="9">9</button>
+                            <button class="key-btn" data-key="*">*</button>
+                            <button class="key-btn" data-key="0">0</button>
+                            <button class="key-btn" data-key="#">#</button>
+                        </div>
+                        
+                        <!-- NEXT button appears centered below keypad -->
+                        <div class="action-footer">
+                            <button class="btn btn-next hidden" id="btn-passcode-next">NEXT</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 4: Crown Queen -->
+        <section id="screen-crown" class="screen">
+            <div class="container text-center slide-up">
+                <h2 class="script-font subtitle">Finally this girl is here 👑</h2>
+                <p class="instruction-text script-font">Please take this crown queen its your special day</p>
+                
+                <div class="crown-wrapper">
+                    <img src="assets/crown.png" alt="Golden Queen Crown" class="sticker crown-sticker floating-animation" id="crown-img">
+                </div>
+                
+                <button class="btn btn-primary btn-take" id="btn-crown-take">TAKE</button>
+            </div>
+        </section>
+
+        <!-- Screen 5: Camera Photo -->
+        <section id="screen-camera" class="screen">
+            <div class="container text-center slide-up">
+                <!-- Replicated spelling typo 'thast' from video -->
+                <h2 class="script-font welcome-queen">Wow thast looks good on you 👀</h2>
+                <p class="instruction-text script-font">now get ready to take a picture!!</p>
+                
+                <div class="camera-wrapper">
+                    <img src="assets/instax_camera.png" alt="Instax Polaroid Camera" class="sticker camera-sticker" id="camera-img">
+                </div>
+                
+                <button class="btn btn-primary btn-see" id="btn-camera-see">see the picture</button>
+            </div>
+            <!-- Flash overlay effect -->
+            <div class="camera-flash" id="camera-flash"></div>
+        </section>
+
+        <!-- Screen 6: Photo Frame Reveal -->
+        <section id="screen-reveal" class="screen">
+            <div class="container text-center slide-up">
+                <h2 class="script-font romantic-text">Wow who is this beautiful girl?? 🫣🤩</h2>
+                
+                <div class="polaroid-outer-container">
+                    <div class="polaroid-frame polaroid-tilt-left">
+                        <div class="polaroid-photo">
+                            <img src="assets/couple_photo_1.png" alt="Beautiful Aishwarya" class="polaroid-img">
+                        </div>
+                        <div class="polaroid-caption script-font">Beautiful Queen 👑</div>
+                    </div>
+                    <!-- Two hand-drawn style outline hearts to the right of polaroid -->
+                    <div class="reveal-hearts">
+                        <span class="reveal-heart heart-1">❤️</span>
+                        <span class="reveal-heart heart-2">❤️</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="btn-reveal-next">NEXT</button>
+            </div>
+        </section>
+
+        <!-- Screen 7: Make a Wish (Blow Candles) -->
+        <section id="screen-wish" class="screen">
+            <div class="container text-center slide-up">
+                <h2 class="script-font wish-title" id="wish-title">Now its time to make a wish ✨💫</h2>
+                
+                <div class="cake-container">
+                    <!-- Interactive CSS Birthday Cake -->
+                    <div class="cake">
+                        <div class="plate"></div>
+                        <div class="layer layer-bottom"></div>
+                        <div class="layer layer-middle"></div>
+                        <div class="layer layer-top"></div>
+                        <div class="icing"></div>
+                        <div class="drips">
+                            <div class="drip drip-1"></div>
+                            <div class="drip drip-2"></div>
+                            <div class="drip drip-3"></div>
+                            <div class="drip drip-4"></div>
+                            <div class="drip drip-5"></div>
+                            <div class="drip drip-6"></div>
+                        </div>
+                        <!-- whipped cream dollops -->
+                        <div class="cream-dollops">
+                            <div class="dollop d-1"></div>
+                            <div class="dollop d-2"></div>
+                            <div class="dollop d-3"></div>
+                            <div class="dollop d-4"></div>
+                            <div class="dollop d-5"></div>
+                            <div class="dollop d-6"></div>
+                            <div class="dollop d-7"></div>
+                            <div class="dollop d-8"></div>
+                        </div>
+                        <!-- colorful sprinkles -->
+                        <div class="sprinkles">
+                            <div class="sprinkle s-1"></div>
+                            <div class="sprinkle s-2"></div>
+                            <div class="sprinkle s-3"></div>
+                            <div class="sprinkle s-4"></div>
+                            <div class="sprinkle s-5"></div>
+                            <div class="sprinkle s-6"></div>
+                            <div class="sprinkle s-7"></div>
+                            <div class="sprinkle s-8"></div>
+                        </div>
+                        <!-- 6 rainbow-colored candles -->
+                        <div class="candles">
+                            <div class="candle c-1 active"><div class="flame"></div></div>
+                            <div class="candle c-2 active"><div class="flame"></div></div>
+                            <div class="candle c-3 active"><div class="flame"></div></div>
+                            <div class="candle c-4 active"><div class="flame"></div></div>
+                            <div class="candle c-5 active"><div class="flame"></div></div>
+                            <div class="candle c-6 active"><div class="flame"></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-blow" id="btn-wish-blow">BLOW</button>
+                <button class="btn btn-primary btn-next hidden" id="btn-wish-next">NEXT</button>
+            </div>
+        </section>
+
+        <!-- Screen 8: Special Gift Hub -->
+        <section id="screen-gifts" class="screen">
+            <div class="container text-center slide-up">
+                <h2 class="script-font gift-hub-title">I have a special gift for you 🎁</h2>
+                <p class="instruction-text script-font">Tap on the gift to open </p>
+                
+                <div class="gift-options">
+                    <!-- Envelope / Love Letter -->
+                    <div class="gift-item" id="gift-letter">
+                        <div class="gift-icon-wrapper">
+                            <img src="assets/love_envelope.png" alt="Love Letter Envelope" class="gift-sticker hover-tilt">
+                        </div>
+                        <span class="gift-label script-font">Letter</span>
+                    </div>
+
+                    <!-- Camera / Photo Gallery -->
+                    <div class="gift-item" id="gift-gallery">
+                        <div class="gift-icon-wrapper">
+                            <img src="assets/instax_camera.png" alt="Camera Sticker" class="gift-sticker hover-tilt">
+                        </div>
+                        <span class="gift-label script-font">Photo Gallery</span>
+                    </div>
+                </div>
+                <!-- Special Message Popup Card -->
+                <div class="popup-message hidden" id="special-msg-popup">
+                    <p class="popup-text font-md bold-font">This is for you, from my side. Hope you liked this..</p>
+                    <p class="popup-text font-sm script-font">Every little detail in this space was chosen with care, built from countless texts, shared laughs, and all the random things in between.</p>
+                    <p class="popup-text font-sm script-font">This little space was made to celebrate you and the wonderful person you are.<br>I hope this little corner brings a smile to your face ☺️</br></p>
+                </div>
+                <!-- Restart button -->
+                <div class="restart-wrapper hidden" id="restart-container">
+                    <button class="btn btn-restart" id="btn-restart-app">Start Over</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SUB-PAGES / EXPANDED GIFT DETAILS -->
+        
+        <!-- Love Letter Details -->
+        <section id="detail-letter" class="screen detail-screen">
+            <div class="scrapbook-letter slide-up">
+                <div class="scrapbook-header">
+                    <button class="btn-detail-back" id="btn-letter-back">back</button>
+                </div>
+                
+                <div class="letter-envelope-open" id="envelope-click-area">
+                    <!-- Ribbon Bow Wrapped Overlay -->
+                    <div class="ribbon-overlay" id="ribbon-container">
+                        <div class="ribbon-line ribbon-h"></div>
+                        <div class="ribbon-line ribbon-v"></div>
+                        <div class="ribbon-bow">
+                            <div class="bow-loop bow-left"></div>
+                            <div class="bow-loop bow-right"></div>
+                            <div class="bow-knot"></div>
+                        </div>
+                        <p class="ribbon-prompt script-font">Untie the Ribbon</p>
+                    </div>
+
+                    <div class="heart-envelope" id="letter-envelope">
+                        <div class="envelope-back"></div>
+                        <div class="letter-paper">
+                            <h3 class="script-font">This is for u,</h3>
+                            <p>You make every day brighter just by being in it. On your special day, I wanted to create something as unique and beautiful as you are.</p>
+                            <p class="text-right script-font">Tap to read full letter...</p>
+                        </div>
+                        <div class="envelope-front"></div>
+                        <div class="envelope-flap"></div>
+                        <div class="envelope-sticker">✉️</div>
+                    </div>
+                    <p class="envelope-hint script-font hidden" id="envelope-text-hint">Tap on the envelope to open</p>
+                </div>
+
+                <!-- Responsive Poster containing only art1 image -->
+                <div class="poster-page-wrapper hidden" id="full-scrapbook-letter">
+                    <div class="art1-container">
+                        <img src="assets/art1.png" alt="Art 1" class="art1-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Details -->
+        <section id="detail-gallery" class="screen detail-screen">
+            <div class="scrapbook-gallery slide-up">
+                <div class="scrapbook-header">
+                    <button class="btn-detail-back" id="btn-gallery-back">back</button>
+                </div>
+                
+                <div class="gallery-container">
+                    <h2 class="script-font scrapbook-title">Your Little Fairytale 👑</h2>
+                    
+                    <div class="gallery-grid">
+                        <div class="gallery-grid-item">
+                            <img src="assets/her1.png" alt="Travel Photo 1">
+                        </div>
+                        <div class="gallery-grid-item">
+                            <img src="assets/her2.png" alt="Travel Photo 2">
+                        </div>
+                        <div class="gallery-grid-item">
+                            <img src="assets/her3.png" alt="Travel Photo 3">
+                        </div>
+                        <div class="gallery-grid-item">
+                            <img src="assets/her4.png" alt="Travel Photo 4">
+                        </div>
+                    </div>
+
+                    <div class="gallery-quote-footer">
+                        <p class="script-font quote-text">
+                            🧿 Your kind of magic isn't the one found in fairytales, it's the kind that turns ordinary moments into something worth remembering 🧿<br>Happyy Birthdayyy✨
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Background Music Audio Tag -->
+    <audio id="bg-music" src="assets/BTS.mp3" loop></audio>
+
+    <!-- Music Controller Footer -->
+    <footer class="music-controller-footer">
+        <div class="music-controls">
+            <button id="btn-music-toggle" class="btn-music-control">▶</button>
+            <div class="volume-control-wrapper">
+                <span class="volume-icon">🔊</span>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.5" class="volume-slider">
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
