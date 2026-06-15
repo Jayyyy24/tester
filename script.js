@@ -28,7 +28,9 @@ let appState = {
     candlesBlown: false,
     letterOpened: false,
     visitedGallery: false,
-    visitedLetter: false
+    visitedLetter: false,
+    modalOpen: false,
+    letterModalOpen: false
 };
 
 // --- DOM ELEMENTS ---
@@ -228,6 +230,20 @@ function navigateTo(screenId) {
 window.addEventListener("hashchange", () => {
     const hash = window.location.hash;
 
+    // Swipe Back Lock: if the photo modal is open and the user tries to navigate away, block it.
+    if (appState.modalOpen && hash !== "#gallery-view") {
+        lastProgrammaticHash = "#gallery-view";
+        window.location.hash = "#gallery-view";
+        return;
+    }
+
+    // Swipe Back Lock: if the letter modal is open and the user tries to navigate away, block it.
+    if (appState.letterModalOpen && hash !== "#letter-view") {
+        lastProgrammaticHash = "#letter-view";
+        window.location.hash = "#letter-view";
+        return;
+    }
+
     // Skip hashes that WE just set — the DOM is already correct
     if (hash === lastProgrammaticHash) {
         lastProgrammaticHash = "";
@@ -240,6 +256,13 @@ window.addEventListener("hashchange", () => {
     // Side-effects for LEAVING specific screens
     if (appState.currentScreen === "detail-letter" && screenId !== "detail-letter") {
         resetEnvelope();
+        const letterModal = document.getElementById("letter-modal");
+        if (letterModal) letterModal.classList.remove("show");
+        appState.letterModalOpen = false;
+    }
+    if (appState.currentScreen === "detail-gallery" && screenId !== "detail-gallery") {
+        const galleryModal = document.getElementById("gallery-modal");
+        if (galleryModal) galleryModal.classList.remove("show");
     }
 
     // Update DOM only — do NOT change the hash again
@@ -468,6 +491,63 @@ btnLetterBack.addEventListener("click", () => {
 btnGalleryBack.addEventListener("click", () => {
     history.back();
 });
+
+// --- PHOTO GALLERY MODAL LOGIC ---
+const galleryModal = document.getElementById("gallery-modal");
+const modalImage = document.getElementById("modal-image");
+const btnModalClose = document.getElementById("btn-modal-close");
+
+document.querySelectorAll(".btn-view-photo").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const src = btn.getAttribute("data-src");
+        if (src && modalImage && galleryModal) {
+            modalImage.src = src;
+            // Lock swipe back: transition URL to #gallery-view and flag state
+            appState.modalOpen = true;
+            lastProgrammaticHash = "#gallery-view";
+            window.location.hash = "#gallery-view";
+            
+            galleryModal.classList.add("show");
+        }
+    });
+});
+
+if (btnModalClose && galleryModal) {
+    btnModalClose.addEventListener("click", () => {
+        // Unlock swipe back and return to gallery page hash
+        appState.modalOpen = false;
+        galleryModal.classList.remove("show");
+        history.back();
+    });
+}
+
+// --- LOVE LETTER MODAL LOGIC ---
+const letterModal = document.getElementById("letter-modal");
+const btnViewLetter = document.getElementById("btn-view-letter");
+const btnLetterModalClose = document.getElementById("btn-letter-modal-close");
+
+if (btnViewLetter && letterModal) {
+    btnViewLetter.addEventListener("click", (e) => {
+        e.stopPropagation();
+        // Lock swipe back: transition URL to #letter-view and flag state
+        appState.letterModalOpen = true;
+        lastProgrammaticHash = "#letter-view";
+        window.location.hash = "#letter-view";
+        
+        letterModal.classList.add("show");
+    });
+}
+
+if (btnLetterModalClose && letterModal) {
+    btnLetterModalClose.addEventListener("click", () => {
+        // Unlock swipe back and return to letter page hash
+        appState.letterModalOpen = false;
+        letterModal.classList.remove("show");
+        history.back();
+    });
+}
+
 
 function checkRevealRestart() {
     const restartContainer = document.getElementById("restart-container");
@@ -726,5 +806,19 @@ window.addEventListener("pageshow", () => {
         fullLetterEl.classList.add("hidden");
         fullLetterEl.classList.remove("fade-in");
     }
+
+    // 11. Close gallery modal if open
+    const galleryModalEl = document.getElementById("gallery-modal");
+    if (galleryModalEl) {
+        galleryModalEl.classList.remove("show");
+    }
+    appState.modalOpen = false;
+
+    // 12. Close letter modal if open
+    const letterModalEl = document.getElementById("letter-modal");
+    if (letterModalEl) {
+        letterModalEl.classList.remove("show");
+    }
+    appState.letterModalOpen = false;
 });
 

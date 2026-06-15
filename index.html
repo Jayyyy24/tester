@@ -302,8 +302,21 @@
 
                 <!-- Responsive Poster containing only art1 image -->
                 <div class="poster-page-wrapper hidden" id="full-scrapbook-letter">
-                    <div class="art1-container">
-                        <img src="assets/art1.png" alt="Art 1" class="art1-img">
+                    <div class="letter-preview-box">
+                        <img src="assets/art1.jpg" alt="Art 1 Preview" class="art1-preview-img">
+                        <div class="letter-preview-overlay">
+                            <button id="btn-view-letter" class="btn-view-letter script-font">View Your Letter 💜</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letter Modal Popup -->
+            <div id="letter-modal" class="letter-modal">
+                <button id="btn-letter-modal-close" class="btn-letter-modal-close">←</button>
+                <div class="letter-modal-content">
+                    <div class="letter-image-scroll-wrapper">
+                        <img src="assets/art1.jpg" alt="Love Letter Full Poster" class="art1-full-img">
                     </div>
                 </div>
             </div>
@@ -322,15 +335,19 @@
                     <div class="gallery-grid">
                         <div class="gallery-grid-item">
                             <img src="assets/her1.png" alt="Travel Photo 1">
+                            <button class="btn-view-photo script-font" data-src="assets/her1.png">View</button>
                         </div>
                         <div class="gallery-grid-item">
                             <img src="assets/her2.png" alt="Travel Photo 2">
+                            <button class="btn-view-photo script-font" data-src="assets/her2.png">View</button>
                         </div>
                         <div class="gallery-grid-item">
                             <img src="assets/her3.png" alt="Travel Photo 3">
+                            <button class="btn-view-photo script-font" data-src="assets/her3.png">View</button>
                         </div>
                         <div class="gallery-grid-item">
                             <img src="assets/her4.png" alt="Travel Photo 4">
+                            <button class="btn-view-photo script-font" data-src="assets/her4.png">View</button>
                         </div>
                     </div>
 
@@ -338,6 +355,16 @@
                         <p class="script-font quote-text">
                             🧿 Your kind of magic isn't the one found in fairytales, it's the kind that turns ordinary moments into something worth remembering 🧿<br>Happyy Birthdayyy✨
                         </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Modal Popup -->
+            <div id="gallery-modal" class="gallery-modal">
+                <div class="gallery-modal-content">
+                    <button id="btn-modal-close" class="btn-modal-close">←</button>
+                    <div class="modal-image-wrapper">
+                        <img id="modal-image" src="" alt="Viewed Photo">
                     </div>
                 </div>
             </div>
