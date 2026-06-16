@@ -29,8 +29,7 @@ let appState = {
     letterOpened: false,
     visitedGallery: false,
     visitedLetter: false,
-    modalOpen: false,
-    letterModalOpen: false
+    modalOpen: false
 };
 
 // --- DOM ELEMENTS ---
@@ -237,13 +236,6 @@ window.addEventListener("hashchange", () => {
         return;
     }
 
-    // Swipe Back Lock: if the letter modal is open and the user tries to navigate away, block it.
-    if (appState.letterModalOpen && hash !== "#letter-view") {
-        lastProgrammaticHash = "#letter-view";
-        window.location.hash = "#letter-view";
-        return;
-    }
-
     // Skip hashes that WE just set — the DOM is already correct
     if (hash === lastProgrammaticHash) {
         lastProgrammaticHash = "";
@@ -256,9 +248,6 @@ window.addEventListener("hashchange", () => {
     // Side-effects for LEAVING specific screens
     if (appState.currentScreen === "detail-letter" && screenId !== "detail-letter") {
         resetEnvelope();
-        const letterModal = document.getElementById("letter-modal");
-        if (letterModal) letterModal.classList.remove("show");
-        appState.letterModalOpen = false;
     }
     if (appState.currentScreen === "detail-gallery" && screenId !== "detail-gallery") {
         const galleryModal = document.getElementById("gallery-modal");
@@ -521,33 +510,6 @@ if (btnModalClose && galleryModal) {
         history.back();
     });
 }
-
-// --- LOVE LETTER MODAL LOGIC ---
-const letterModal = document.getElementById("letter-modal");
-const btnViewLetter = document.getElementById("btn-view-letter");
-const btnLetterModalClose = document.getElementById("btn-letter-modal-close");
-
-if (btnViewLetter && letterModal) {
-    btnViewLetter.addEventListener("click", (e) => {
-        e.stopPropagation();
-        // Lock swipe back: transition URL to #letter-view and flag state
-        appState.letterModalOpen = true;
-        lastProgrammaticHash = "#letter-view";
-        window.location.hash = "#letter-view";
-        
-        letterModal.classList.add("show");
-    });
-}
-
-if (btnLetterModalClose && letterModal) {
-    btnLetterModalClose.addEventListener("click", () => {
-        // Unlock swipe back and return to letter page hash
-        appState.letterModalOpen = false;
-        letterModal.classList.remove("show");
-        history.back();
-    });
-}
-
 
 function checkRevealRestart() {
     const restartContainer = document.getElementById("restart-container");
@@ -813,12 +775,5 @@ window.addEventListener("pageshow", () => {
         galleryModalEl.classList.remove("show");
     }
     appState.modalOpen = false;
-
-    // 12. Close letter modal if open
-    const letterModalEl = document.getElementById("letter-modal");
-    if (letterModalEl) {
-        letterModalEl.classList.remove("show");
-    }
-    appState.letterModalOpen = false;
 });
 
