@@ -268,8 +268,11 @@
         
         <!-- Love Letter Details -->
         <section id="detail-letter" class="screen detail-screen">
+            <!-- Fixed back arrow shown when the letter is revealed -->
+            <button id="btn-letter-modal-close" class="btn-letter-modal-close hidden">←</button>
+
             <div class="scrapbook-letter slide-up">
-                <div class="scrapbook-header">
+                <div class="scrapbook-header" id="letter-close-header">
                     <button class="btn-detail-back" id="btn-letter-back">back</button>
                 </div>
                 
@@ -300,14 +303,178 @@
                     <p class="envelope-hint script-font hidden" id="envelope-text-hint">Tap on the envelope to open</p>
                 </div>
 
-                <!-- Responsive Poster containing only art1 image -->
+                <!-- Redesigned Vertical Scrolling Webpage Container (shown directly after envelope opens) -->
                 <div class="poster-page-wrapper hidden" id="full-scrapbook-letter">
-                    <div class="art1-container">
-                        <img src="assets/art1.png" alt="Art 1" class="art1-img">
+                    <div class="letter-page-container">
+                        <!-- Floating Fairytale Particles/Sparkles -->
+                        <div class="floating-sparkle p1">👑</div>
+                        <div class="floating-sparkle p2">✨</div>
+                        <div class="floating-sparkle p3">🎀</div>
+                        <div class="floating-sparkle p4">🌸</div>
+                        <div class="floating-sparkle p5">🦋</div>
+                        <div class="floating-sparkle p6">💫</div>
+
+                        <!-- Left & Right floating side columns for desktop -->
+                        <div class="side-deco-left">
+                            <div style="transform: rotate(-10deg);">🌸</div>
+                            <div style="transform: rotate(15deg);">🦋</div>
+                            <div>✨</div>
+                            <div style="transform: rotate(-5deg);">👑</div>
+                            <div style="transform: rotate(20deg);">🎀</div>
+                            <div style="transform: rotate(-12deg);">💮</div>
+                            <div>🌙</div>
+                            <div style="transform: rotate(8deg);">🌸</div>
+                        </div>
+                        <div class="side-deco-right">
+                            <div style="transform: rotate(10deg); font-size: 2.2rem;">🏰</div>
+                            <div style="transform: rotate(-15deg);">🦋</div>
+                            <div>✨</div>
+                            <div style="transform: rotate(5deg);">👑</div>
+                            <div style="transform: rotate(-20deg);">🎀</div>
+                            <div style="transform: rotate(12deg);">💫</div>
+                            <div style="transform: rotate(-8deg);">🌸</div>
+                            <div>🔮</div>
+                        </div>
+
+                        <!-- Floral & Butterfly decorative accents -->
+                        <div class="floral-deco top-left">🌸</div>
+                        <div class="floral-deco top-right">🌸</div>
+                        <div class="floral-deco bottom-left">🌺</div>
+                        <div class="floral-deco bottom-right">🌺</div>
+
+                        <!-- Section 1: Heading -->
+                        <header class="letter-header-section">
+                            <div style="font-size: 3rem; margin-bottom: -10px; filter: drop-shadow(0 2px 8px rgba(255,215,0,0.5));">👑</div>
+                            <h1 class="letter-main-title">Happy Birthday</h1>
+                            <p class="letter-sub-title script-font">to my favorite princess ✨👑💜</p>
+                            <div class="floral-divider">✨ ─── 🎀 ─── 🏰 ─── 🎀 ─── ✨</div>
+                        </header>
+
+                        <!-- Section 2: Friendship Intro Card -->
+                        <section class="letter-card-section intro-section">
+                            <div class="intro-grid">
+                                <div class="intro-text-wrapper">
+                                    <div class="section-tag script-font">💜 A Beautiful Fairytale Friendship 🏰</div>
+                                    <p class="intro-p">It's funny how two strangers on <strong>Instagram</strong> ended up sharing so many magical conversations.</p>
+                                    <p class="intro-p">Some people arrive unexpectedly like a fairytale, making ordinary days seem completely magical.</p>
+                                    <p class="highlight-text script-font">Thank you for being such a sweet, caring, and wonderful friend! ⭐</p>
+                                </div>
+                                <div class="intro-img-wrapper">
+                                    <img src="assets/2222.png" alt="Wonderful Friendship Illustration" class="intro-banner-img">
+                                </div>
+                            </div>
+                            <div class="wishes-footer-banner">
+                                <span class="gift-icon">🎁</span>
+                                <p class="banner-wish-text">May this fairytale year bring you: golden opportunities, sparkling moments, endless joy, and success! 💫</p>
+                            </div>
+                        </section>
+
+                        <div class="section-divider">✦ 👑 🎀 👑 ✦</div>
+
+                        <!-- Section 3: What Makes You Special Grid -->
+                        <section class="letter-special-section">
+                            <h2 class="section-title script-font">Your Princess Magic ✨</h2>
+                            <div class="special-grid">
+                                <div class="special-card">
+                                    <div class="card-icon">👑</div>
+                                    <h3 class="card-heading">Genuine Personality</h3>
+                                    <p class="card-text">Your realness, honesty, and pure heart. That is the true princess magic in you.</p>
+                                </div>
+                                <div class="special-card">
+                                    <div class="card-icon">✨</div>
+                                    <h3 class="card-heading">Positive Energy</h3>
+                                    <p class="card-text">You have a way of turning ordinary moments into lovely smiles and fairytale joy!</p>
+                                </div>
+                                <div class="special-card">
+                                    <div class="card-icon">🏰</div>
+                                    <h3 class="card-heading">Strong Mindset</h3>
+                                    <p class="card-text">You dream so big but stay so humble, kind, and graceful. Keep shining bright!</p>
+                                </div>
+                                <div class="special-card">
+                                    <div class="card-icon">🌸</div>
+                                    <h3 class="card-heading">Kind Nature</h3>
+                                    <p class="card-text">You care, you understand, and you lift everyone up like a true fairy godmother!</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="section-divider">✦ 🦋 🌙 🦋 ✦</div>
+
+                        <!-- Section 4: Birthday Wishes Rows -->
+                        <section class="letter-wishes-section">
+                            <h2 class="section-title script-font">Magical Wishes for Aishwarya 💜</h2>
+                            <div class="wishes-flex">
+                                <div class="wish-bubble">
+                                    <span class="bubble-icon">👑</span>
+                                    <p>May you always be treated like the princess you are, surrounded by love and pure happiness!</p>
+                                </div>
+                                <div class="wish-bubble">
+                                    <span class="bubble-icon">🎀</span>
+                                    <p>May this year bring beautiful new chapters, sweet fairytale moments, and countless blessings.</p>
+                                </div>
+                                <div class="wish-bubble">
+                                    <span class="bubble-icon">🌙</span>
+                                    <p>May your dreams take you to castles and stars you've always wished for. You truly deserve it!</p>
+                                </div>
+                                <div class="wish-bubble">
+                                    <span class="bubble-icon">💖</span>
+                                    <p>May bright smiles, big goals, and divine fairytale timing guide your beautiful journey.</p>
+                                </div>
+                                <div class="wish-bubble">
+                                    <span class="bubble-icon">🧚</span>
+                                    <p>May life sprinkle magic fairy dust on all your paths and keep you smiling forever!</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="section-divider">✦ 🌸 ✨ 🌸 ✦</div>
+
+                        <!-- Section 5: Handwritten Note 1 -->
+                        <section class="letter-note-section">
+                            <h2 class="section-title script-font">A Magical Note Just for You 🎀</h2>
+                            <div class="handwritten-note-container">
+                                <img src="assets/note1.png" alt="A Special Note Just for You" class="handwritten-note-img">
+                            </div>
+                        </section>
+
+                        <div class="section-divider">✦ 👑 ⭐ 👑 ✦</div>
+
+                        <!-- Section 6: Additional Wishes / Always Be Here -->
+                        <section class="letter-card-section always-here-section">
+                            <div class="intro-grid always-here-grid">
+                                <div class="intro-text-wrapper">
+                                    <div class="stars-deco">⭐⭐⭐</div>
+                                    <p class="intro-p large-quote">No matter what, I'll always be here cheering for you, supporting your dreams, and wishing the very best fairytale life for you!</p>
+                                    <p class="highlight-text script-font purple-highlight">You are priceless, and I'm so proud to know you! 💜</p>
+                                </div>
+                                <div class="intro-img-wrapper">
+                                    <img src="assets/2222.png" alt="Supportive Friendship" class="intro-banner-img rounded-img">
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="section-divider">✦ 🎀 💫 🎀 ✦</div>
+
+                        <!-- Section 7: Handwritten Note 2 -->
+                        <section class="letter-note-section">
+                            <h2 class="section-title script-font">Wishes Written Under the Stars 🌙</h2>
+                            <div class="handwritten-note-container">
+                                <img src="assets/note2.png" alt="My Wishes Will Always Be With You" class="handwritten-note-img">
+                            </div>
+                        </section>
+
+                        <!-- Section 8: Heartfelt Closing -->
+                        <footer class="letter-footer-section">
+                            <div class="floral-divider">✨ ──── 🌸 ──── 🏰 ──── 🌸 ──── ✨</div>
+                            <p class="closing-text font-md bold-font">Thank you for being such a magical and sweet friend.</p>
+                            <p class="closing-text font-sm script-font">Here's to many more conversations, memories, and magical laughter! 👑🎀💜</p>
+                            <div class="butterflies">🦋 ✨ 👑 ✨ 🦋</div>
+                        </footer>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- Photo Gallery Details -->
         <section id="detail-gallery" class="screen detail-screen">

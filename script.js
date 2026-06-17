@@ -510,6 +510,20 @@ if (btnModalClose && galleryModal) {
         history.back();
     });
 }
+// --- LOVE LETTER TRANSITION & BACK ARROW LOGIC ---
+const btnLetterModalClose = document.getElementById("btn-letter-modal-close");
+const letterCloseHeader = document.getElementById("letter-close-header");
+
+if (btnLetterModalClose) {
+    btnLetterModalClose.addEventListener("click", () => {
+        // Unlock swipe back, hide back arrow, restore header and reset envelope
+        appState.letterModalOpen = false;
+        btnLetterModalClose.classList.add("hidden");
+        if (letterCloseHeader) letterCloseHeader.classList.remove("hidden");
+        resetEnvelope();
+        navigateTo("screen-gifts");
+    });
+}
 
 function checkRevealRestart() {
     const restartContainer = document.getElementById("restart-container");
@@ -544,6 +558,10 @@ function resetEnvelope() {
     }
     envelopeArea.classList.remove("hidden");
     fullLetterPaper.classList.add("hidden");
+    
+    if (letterCloseHeader) letterCloseHeader.classList.remove("hidden");
+    if (btnLetterModalClose) btnLetterModalClose.classList.add("hidden");
+    appState.letterModalOpen = false;
 }
 
 envelopeArea.addEventListener("click", () => {
@@ -556,8 +574,17 @@ envelopeArea.addEventListener("click", () => {
     // Envelope open transition timeline
     setTimeout(() => {
         envelopeArea.classList.add("hidden");
+        if (letterCloseHeader) letterCloseHeader.classList.add("hidden");
+        if (btnLetterModalClose) btnLetterModalClose.classList.remove("hidden");
+        
         fullLetterPaper.classList.remove("hidden");
         fullLetterPaper.classList.add("fade-in");
+        
+        // Lock swipe back: transition URL to #letter-view and flag state
+        appState.letterModalOpen = true;
+        lastProgrammaticHash = "#letter-view";
+        window.location.hash = "#letter-view";
+        
         setTimeout(adjustCollageScale, 50); // triggers scale check once content becomes visible
     }, 1300);
 });
